@@ -1,5 +1,8 @@
-var SPREADSHEET_ID = '1M_bMF0OQg2SqYQJlMzrpzy3wpCgKDc5OsZqGiYEzoNI';
-var ALLOWED = ['1TN90W3XfiruQVvrp6ZCZw0mnTanLMq-9apJUGZdsDuY', '1TN90W3XfiruQVvrp6ZCZw0mnTanLMq-9apJUGZdsDuY'];
+var SPREADSHEET_IDS = [
+  '1M_bMF0OQg2SqYQJlMzrpzy3wpCgKDc5OsZqGiYEzoNI',
+  '1TN90W3XfiruQVvrp6ZCZw0mnTanLMq-9apJUGZdsDuY'
+];
+var ALLOWED = ['FEED_DASH', 'INS_DASH'];
 
 function doGet(e) {
   var name = (e && e.parameter && e.parameter.sheet) || '';
@@ -7,7 +10,12 @@ function doGet(e) {
     return ContentService.createTextOutput('Parameter sheet harus salah satu dari: ' + ALLOWED.join(', '))
       .setMimeType(ContentService.MimeType.TEXT);
   }
-  var sh = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(name);
+  var sh = null;
+  for (var i = 0; i < SPREADSHEET_IDS.length && !sh; i++) {
+    try {
+      sh = SpreadsheetApp.openById(SPREADSHEET_IDS[i]).getSheetByName(name);
+    } catch (err) {}
+  }
   if (!sh) {
     return ContentService.createTextOutput('Sheet tidak ditemukan: ' + name)
       .setMimeType(ContentService.MimeType.TEXT);
