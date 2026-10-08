@@ -1,13 +1,4 @@
-/**
- * Dashboard SPG - API CSV untuk sheet FEED_DASH dan INS_DASH.
- * Pasang di Google Sheets: Extensions > Apps Script, paste file ini.
- * Deploy: Deploy > New deployment > Web app
- *   Execute as: Me | Who has access: Anyone
- *
- * URL hasil:
- *   <WEB_APP_URL>?sheet=FEED_DASH
- *   <WEB_APP_URL>?sheet=INS_DASH
- */
+var SPREADSHEET_ID = 'ISI_ID_SPREADSHEET_DI_SINI';
 var ALLOWED = ['FEED_DASH', 'INS_DASH'];
 
 function doGet(e) {
@@ -16,7 +7,7 @@ function doGet(e) {
     return ContentService.createTextOutput('Parameter sheet harus salah satu dari: ' + ALLOWED.join(', '))
       .setMimeType(ContentService.MimeType.TEXT);
   }
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name);
+  var sh = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(name);
   if (!sh) {
     return ContentService.createTextOutput('Sheet tidak ditemukan: ' + name)
       .setMimeType(ContentService.MimeType.TEXT);
