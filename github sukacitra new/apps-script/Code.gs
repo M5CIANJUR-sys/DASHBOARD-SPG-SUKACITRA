@@ -1,5 +1,5 @@
-var SPREADSHEET_ID = 'ISI_ID_SPREADSHEET_DI_SINI';
-var ALLOWED = ['FEED_DASH', 'INS_DASH'];
+var SPREADSHEET_ID = '1M_bMF0OQg2SqYQJlMzrpzy3wpCgKDc5OsZqGiYEzoNI';
+var ALLOWED = ['1TN90W3XfiruQVvrp6ZCZw0mnTanLMq-9apJUGZdsDuY', '1TN90W3XfiruQVvrp6ZCZw0mnTanLMq-9apJUGZdsDuY'];
 
 function doGet(e) {
   var name = (e && e.parameter && e.parameter.sheet) || '';
